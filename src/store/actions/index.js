@@ -1,0 +1,1 @@
+export {fetchMovie} from './main';

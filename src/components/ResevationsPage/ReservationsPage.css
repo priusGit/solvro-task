@@ -1,0 +1,34 @@
+.reservationsPage{
+    height: 100vh;
+    width: 100vw;
+    background: rgb(18, 18, 26);
+    padding-top: 60px;
+}
+h1{
+    font-size: 30px;
+    color: white;
+    text-align: center;
+}
+.datePicker{
+    margin-top: 50px;
+    text-align: center;
+}
+.datePick{
+    border: 1px solid red;
+    padding: 10px 25px;
+    font-size: 20px;
+}
+.rowName{
+    font-size: 20px;
+    color: white;
+}
+.seatRow{
+    text-align: center;
+}
+
+.seat{
+    color: white;
+    border: 1px solid pink;
+    padding: 5px 30px;
+
+}
