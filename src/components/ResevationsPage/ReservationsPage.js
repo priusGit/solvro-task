@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './ReservationsPage.css';
+import classNames from 'classnames';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
+import Seat from '../SmallParts/Seat/seat'
 import Auxi from '../../hoc/Auxi'
 class ReservationsPage extends Component {
     componentDidMount() {
@@ -53,7 +55,8 @@ class ReservationsPage extends Component {
                 valid: false,
                 touched: false
             }
-        }
+        },
+        activeHour:false
     }
 
     inputChangedHandler = (elementType, event, inputIdentifier) => {
@@ -67,6 +70,17 @@ class ReservationsPage extends Component {
         updatedreservationForm[inputIdentifier] = updatedFormElement;
         this.setState({ reservationForm: updatedreservationForm});
     }
+
+    // toggleHour = (dateValue) =>{
+    //     let activeVar;
+    //     if(this.state.active===dateValue){
+    //         activeVar=false;
+    //     }
+    //     else{
+    //         activeVar=dateValue;
+    //     }
+    //     this.setState({active: activeVar});
+    // }
 
     render() {
         const formElementsArray = [];
@@ -82,7 +96,6 @@ class ReservationsPage extends Component {
                 {formElementsArray.map((formElement,index) => (
                     <div key={index}>
                     <label>{formElement.config.label}</label>
-                    {console.log(formElement)}
                     <input key={formElement.id} type={formElement.config.elementConfig.elementType} value={formElement.config.value} id={formElement.config.label} required={formElement.config.validation.required} onChange={(event) => this.inputChangedHandler(formElement.config.elementType, event, formElement.id)}></input>
                     </div>
                 ))}
@@ -98,30 +111,56 @@ class ReservationsPage extends Component {
             let minutes= date.getMinutes();
             let finalText = hour+":"+minutes;
                 return(
-                    <li className="datePick" key={index}>{finalText}</li>
+                    <li className={classNames(
+                "datePick", 
+                this.props.activeHour===dateElement ? "selectedHour" : "" 
+              )}
+              onClick={() => this.props.setActiveHour(dateElement)} key={dateElement}>{finalText}</li>
                 )
             }
         ))
         let seats = this.props.arrangement;
         let seatMap = Object.keys(seats).map(row => (
             <ul className="seatRow" key={row}>
+                <li className="rowName">{row}</li>
                 {
                     seats[row].map((seat,index) => (
-                        <li key={index} className="seat">{index+1}</li>
-                        //seat[index+1] dla zajętości
+                        <Seat key={index} status={Object.values(seat)[0]} row={row} number={index+1}/>
                     ))
                     
                 }
                 
             </ul>
         ))
-
+        //conditional rendering logic
+        let content;
+        if(this.props.activeHour!=null)
+        {
+            content=(
+                <div className="screeningRoom">
+                    <div className="screen"></div>    
+                    {seatMap}
+                </div>
+            )
+            if(this.props.seatsPicked.length!==0)
+            {
+                content=(
+                    <Auxi>
+                    <div className="screeningRoom">
+                    <div className="screen"></div>    
+                    {seatMap}
+                    </div>
+                    {form}
+                    </Auxi>
+                )
+            }
+        }
+        
         return (
             <section className="reservationsPage">
                 <h1>{this.props.title}</h1>
                 <ul className="datePicker">{datePick}</ul>
-                <div className="ScreeningRoom">{seatMap}</div>
-                {form}
+                {content}
             </section>
         )
     }
@@ -130,13 +169,16 @@ const mapStateToProps = state => {
     return {
         title: state.title,
         sessions: state.sessions,
-        arrangement: state.arrangement
+        arrangement: state.arrangement,
+        activeHour: state.activeHour,
+        seatsPicked: state.seatsPicked
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchMovieData: (movieID) => dispatch(actions.fetchMovie(movieID))
+        onFetchMovieData: (movieID) => dispatch(actions.fetchMovie(movieID)),
+        setActiveHour: (activeHour) => dispatch(actions.setActiveHour(activeHour))
     };
 };
 

@@ -23,6 +23,14 @@ export const fetchMovieFail = (error) => {
     };
 }
 
+export const setActiveHour = (activeHour) => {
+
+    return {
+        type: actionTypes.SET_ACTIVE_HOUR,
+        activeHour: activeHour
+    };
+};
+
 export const fetchMovie = (link) => {
     return dispatch => {
         dispatch(fetchMovieStart());
@@ -36,18 +44,16 @@ export const fetchMovie = (link) => {
             });
     }
 }
-export const addItemOnClickAction = (item, price) => {
+export const seatPicked = (seatRow,seatNum) => {
     return {
         type: actionTypes.ADD_ITEM,
-        item: item,
-        price: price
+        seatRow:seatRow,
+        seatNum:seatNum
     };
 }
-export const deleteItemFromBasketAction = (item, price,id) => {
+export const deleteItemFromBasketAction = (seatID, price,id) => {
     return {
         type: actionTypes.DELETE_ITEM,
-        item: item,
-        price: price,
-        id:id
+        seatID: seatID
     };
 };

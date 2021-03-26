@@ -5,4 +5,5 @@ export const FETCH_MOVIE_FAIL = 'FETCH_MOVIE_FAIL';
 export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SCREEN_RESIZE = 'SCREEN_RESIZE';
+export const SET_ACTIVE_HOUR = 'SET_ACTIVE_HOUR';
 

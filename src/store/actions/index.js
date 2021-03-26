@@ -1,1 +1,1 @@
-export {fetchMovie} from './main';
+export {fetchMovie,seatPicked,setActiveHour} from './main';

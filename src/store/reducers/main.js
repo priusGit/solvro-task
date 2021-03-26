@@ -13,9 +13,23 @@ const initialState = {
         'E': [{'1': 1}, {'2': 1}, {'3': 1}, {'4': 0}, {'5': 0}, {'6': 1}, {'7': 1}, {'8': 1}, {'9': 0}],
         'F': [{'1': 0}, {'2': 0}, {'3': 0}, {'4': 0}, {'5': 1}, {'6': 0}, {'7': 1}, {'8': 0}, {'9': 0}],
         'G': [{'1': 1}, {'2': 1}, {'3': 1}, {'4': 1}, {'5': 1}, {'6': 1}, {'7': 1}, {'8': 1}, {'9': 1}],
-    }
+    },
+    seatsPicked:[
+    ],
+    activeHour:null
 };
 
+const setActiveHour = (state, action) => {
+    let hourVar;
+    if(state.activeHour===action.activeHour)
+    {
+        hourVar=null;
+    }
+    else{
+        hourVar=action.activeHour;
+    }
+    return updateObject(state, { activeHour: hourVar });
+};
 const fetchMovieStart = (state, action) => {
     return updateObject(state, { loading: true });
 };
@@ -28,66 +42,40 @@ const fetchMovieFail = (state, action) => {
     return updateObject(state, { loading: false, numberOfReservations: action.numberOfReservations });
 };
 const addItem = (state, action) => {
-    let newItem = { item: action.item, price: action.price,amount:1 },found=false;
-    const newPrice = Number(action.price) + state.fullPrice;
-    const updatedOrderedItems = state.orderedItems.map(obj=>{
-        if(obj.item===action.item){
-            obj.amount=obj.amount+1;
+    console.log(action);
+    let newSeat = {seatRow:action.seatRow,seatNum:action.seatNum},found=false, indexFound=null;
+    
+    console.log(state.seatsPicked.length);
+    if(state.seatsPicked.length===0)
+    {   
+        let newState = [...state.seatsPicked];
+        return updateObject(state, {
+            seatsPicked: newState.concat(newSeat)
+        });
+    }
+    
+    state.seatsPicked.map((obj,index)=>{
+        if(obj.seatRow===action.seatRow&&obj.seatNum===action.seatNum){
+            indexFound=index;
             found=true;
-            return obj; 
         }
         return obj;
-    });
+    })
+
     if(found){
+        let newState = [...state.seatsPicked];
+        newState.splice(indexFound, 1);
         return updateObject(state, {
-            orderedItems: updatedOrderedItems,
-            fullPrice: newPrice
+            seatsPicked: newState
         });
     }
     else{
+        console.log(state.seatsPicked);
+        console.log(newSeat);
         return updateObject(state, {
-            orderedItems: state.orderedItems.concat(newItem),
-            fullPrice: newPrice
+            seatsPicked: state.seatsPicked.concat(newSeat)
         });
     }
-};
-
-const screenResize = (state, action) => {
-    const newWidth = action.width;
-    console.log(newWidth);
-    return updateObject(state, {
-        windowWidth: newWidth
-    });
-};
-
-const deleteItem = (state, action) => {
-    let helper;
-    const newPrice = state.fullPrice - Number(action.price);
-    const updatedOrderedItems = state.orderedItems.map(obj=>{
-        if(obj.item===action.item){
-            helper = obj.amount;
-            if(obj.amount>1)
-            {
-                obj.amount=obj.amount-1;
-            }
-            console.log(obj.item+" "+action.item+" "+obj.amount+" "+helper);
-            return obj; 
-        }
-        return obj;
-    });
-    if(helper>1){
-        return updateObject(state, {
-            orderedItems: updatedOrderedItems,
-            fullPrice: newPrice
-        });
-    }
-    else{
-        let newState = [...state.orderedItems];
-        newState.splice(action.id, 1);
-        return {
-            ...state, orderedItems: newState, fullPrice: newPrice
-        };
-    } 
 };
 
 const reducer = (state = initialState, action) => {
@@ -96,8 +84,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_MOVIE_SUCCESS: return fetchMovieSuccess(state, action);
         case actionTypes.FETCH_MOVIE_FAIL: return fetchMovieFail(state, action);
         case actionTypes.ADD_ITEM: return addItem(state, action);
-        case actionTypes.DELETE_ITEM: return deleteItem(state, action);
-        case actionTypes.SCREEN_RESIZE: return screenResize(state, action);
+        case actionTypes.SET_ACTIVE_HOUR: return setActiveHour(state, action);
         default: return state;
     }
 };
