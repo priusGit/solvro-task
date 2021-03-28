@@ -6,4 +6,6 @@ export const ADD_ITEM = 'ADD_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const SCREEN_RESIZE = 'SCREEN_RESIZE';
 export const SET_ACTIVE_HOUR = 'SET_ACTIVE_HOUR';
+export const SAVE_FORM_DATA = 'SAVE_FORM_DATA';
+
 

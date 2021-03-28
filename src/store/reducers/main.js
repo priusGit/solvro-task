@@ -3,20 +3,13 @@ import { updateObject } from '../utility';
 
 const initialState = {
     loading: false,
-    title: 'Wojownicy Solvro, Więzień KNSI',
-    sessions: [1561372200000, 1561379400000, 1561386600000, 1561390200000],
-    arrangement: {
-        'A': [{'1': 1}, {'2': 0}, {'3': 1}, {'4': 1}, {'5': 1}, {'6': 0}, {'7': 1}],
-        'B': [{'1': 1}, {'2': 1}, {'3': 0}, {'4': 1}, {'5': 1}, {'6': 1}, {'7': 1}, {'8': 1}],
-        'C': [{'1': 1}, {'2': 0}, {'3': 0}, {'4': 1}, {'5': 0}, {'6': 0}, {'7': 0}, {'8': 1}, {'9': 0}],
-        'D': [{'1': 0}, {'2': 0}, {'3': 1}, {'4': 0}, {'5': 1}, {'6': 0}, {'7': 0}, {'8': 1}, {'9': 0}],
-        'E': [{'1': 1}, {'2': 1}, {'3': 1}, {'4': 0}, {'5': 0}, {'6': 1}, {'7': 1}, {'8': 1}, {'9': 0}],
-        'F': [{'1': 0}, {'2': 0}, {'3': 0}, {'4': 0}, {'5': 1}, {'6': 0}, {'7': 1}, {'8': 0}, {'9': 0}],
-        'G': [{'1': 1}, {'2': 1}, {'3': 1}, {'4': 1}, {'5': 1}, {'6': 1}, {'7': 1}, {'8': 1}, {'9': 1}],
-    },
+    title: null,
+    sessions: null,
+    arrangement: null,
     seatsPicked:[
     ],
-    activeHour:null
+    activeHour:null,
+    formData:null
 };
 
 const setActiveHour = (state, action) => {
@@ -33,19 +26,25 @@ const setActiveHour = (state, action) => {
 const fetchMovieStart = (state, action) => {
     return updateObject(state, { loading: true });
 };
-
+const saveFormData = (state, action) => {
+    const UserData = {};
+        for (let formElementIdentifier in action.formData) {
+            UserData[formElementIdentifier] = action.formData[formElementIdentifier].value;
+        }
+        return updateObject(state, {
+            formData: UserData
+        });
+};
 const fetchMovieSuccess = (state, action) => {
-    return updateObject(state, { loading: false, numberOfReservations: action.numberOfReservations });
+    return updateObject(state, {title:action.movieData.title,sessions:action.movieData.sessions,arrangement:action.movieData.arrangement});
 };
 
 const fetchMovieFail = (state, action) => {
-    return updateObject(state, { loading: false, numberOfReservations: action.numberOfReservations });
+    return updateObject(state, { loading: false});
 };
 const addItem = (state, action) => {
-    console.log(action);
     let newSeat = {seatRow:action.seatRow,seatNum:action.seatNum},found=false, indexFound=null;
     
-    console.log(state.seatsPicked.length);
     if(state.seatsPicked.length===0)
     {   
         let newState = [...state.seatsPicked];
@@ -70,8 +69,6 @@ const addItem = (state, action) => {
         });
     }
     else{
-        console.log(state.seatsPicked);
-        console.log(newSeat);
         return updateObject(state, {
             seatsPicked: state.seatsPicked.concat(newSeat)
         });
@@ -85,6 +82,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_MOVIE_FAIL: return fetchMovieFail(state, action);
         case actionTypes.ADD_ITEM: return addItem(state, action);
         case actionTypes.SET_ACTIVE_HOUR: return setActiveHour(state, action);
+        case actionTypes.SAVE_FORM_DATA: return saveFormData(state, action);
         default: return state;
     }
 };

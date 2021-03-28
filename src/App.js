@@ -5,12 +5,14 @@ import MainPage from './components/MainPage/MainPage';
 import ReservationsPage from './components/ResevationsPage/ReservationsPage';
 import Auxi from './hoc/Auxi';
 import Layout from './components/Layout/Layout'
+import Summary from './components/Summary/Summary'
 class App extends Component {
   render() {
     let routes = (
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route path="/reservations" exact component={ReservationsPage} />
+        <Route path="/summary" exact component={Summary} />
       </Switch>
     );
     return (

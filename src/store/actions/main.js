@@ -9,7 +9,6 @@ export const fetchMovieStart = () => {
 };
 
 export const fetchMovieSuccess = (data) => {
-
     return {
         type: actionTypes.FETCH_MOVIE_SUCCESS,
         movieData: data
@@ -34,10 +33,10 @@ export const setActiveHour = (activeHour) => {
 export const fetchMovie = (link) => {
     return dispatch => {
         dispatch(fetchMovieStart());
-        axios.get('/ping')
+        axios.post('/movie',
+            {movie:link})
             .then(res => {
-                console.log(res);
-                dispatch(fetchMovieSuccess(res));
+                dispatch(fetchMovieSuccess(res.data));
             })
             .catch(err => {
                 dispatch(fetchMovieFail(err));
@@ -51,9 +50,9 @@ export const seatPicked = (seatRow,seatNum) => {
         seatNum:seatNum
     };
 }
-export const deleteItemFromBasketAction = (seatID, price,id) => {
+export const saveFormData = (formData) => {
     return {
-        type: actionTypes.DELETE_ITEM,
-        seatID: seatID
+        type: actionTypes.SAVE_FORM_DATA,
+        formData:formData
     };
-};
+}

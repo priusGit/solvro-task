@@ -20,6 +20,16 @@ h1{
     font-size: 20px;
     transition: 0.15s linear;
     cursor: pointer;
+    opacity:100%;
+    animation: fade .5s;
+}
+@keyframes fade{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 100%;
+    }
 }
 .datePick:last-child{
     margin-right: 0;
@@ -36,7 +46,12 @@ h1{
 }
 .screeningRoom{
     margin-top: 50px;
-    margin-bottom: 100px;
+    animation: fade .5s;
+}
+.screeningRoom h2{
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
 }
 .screen{
     width: 50vw;
@@ -55,54 +70,84 @@ h1{
     text-align: center;
     position: relative;
 }
-.form{
-    margin-top: 40px;
+.bottomBar{
+    background-color: rgb(36, 36, 56);
+    border: 3px solid rgb(80, 80, 114);
+    border-radius: 50px;
+    width: 70%;
+    position: fixed;
+    bottom: 0;
+    left: 15%;
+    box-sizing: border-box;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    animation: fade 0.3s;
+}
+.bottomBar div{
+    flex-grow: 1;
+}
+.bottomBar li{
+    font-size: 30px;
+    height: 50px;
+    padding: 0 5px;
+    line-height: 50px;
     color: white;
-    margin-left: 50%;
-    width: 40vw;
-    transform: translateX(-50%);
-    padding-bottom: 50px;
 }
-label{
-    font-size: 20px;
-    display: block;
-    text-align: left;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-input{
-    padding: 10px 20px;
-    width: 100%;
-    font-size: 19px;
-    border: none;
-    outline:none;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    color: #000000;
+.toForm{
+    display: inline;
+    color:white;
+    text-decoration: none;
+    font-size: 23px;
+    background-color: rgb(251, 158, 37);
+    padding: 7px 30px;
+    border-radius: 50px;
+    font-family: 'Oswald', sans-serif;
     transition: 0.1s linear;
-}
-input:hover{
-    box-shadow: 0px 0px 17px rgb(207, 207, 207);
-}
-button{
-    margin-top: 30px;
-    padding: 15px 20px;
-    width: 80%;
-    margin-left: 10%;
-    font-size: 20px;
-    background-color:rgb(251, 158, 37);
-    color: #000000;
     border: none;
-    box-shadow: 0px 0px 17px rgba(66,66,66,.29);
-    transition: 0.2s linear;
+    outline: none;
 }
-button:hover{
-    cursor: pointer;
+.toForm:hover{
     box-shadow: 0px 0px 17px rgb(251, 158, 37);
-    color: white;
-    border: none;
-    outline:none;
 }
-input:focus {
-    outline:none;
+.toForm:focus{
+    border: none
+}
+.pageOverlay{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.616);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    animation: fade 0.3s;
+}
+@keyframes fade{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.blurry{
+    filter: blur(4px);
+}
+.blurry .bottomBar{
+    display: none;
+}
+
+.xSign{
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    fill: white;
+    transform: scale(1.5);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+.xSign:hover{
+    transform: scale(1.7);
 }

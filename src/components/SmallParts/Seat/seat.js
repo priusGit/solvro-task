@@ -7,8 +7,6 @@ import './seat.css';
 class Seat extends Component {
     componentDidMount(){
         this.props.seatsPicked.map((obj)=>{
-            console.log(obj);
-            console.log()
             if(obj.seatRow===this.props.row&&obj.seatNum===this.props.number){
                 this.setState({active:true})
             }

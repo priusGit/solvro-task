@@ -10,7 +10,7 @@ class MainPage extends Component {
                         <div className="movieInfo">
                             <p>Już od 15 marca!</p>
                             <h1>Wojownicy Solvro, Więzień KNSI</h1>
-                            <NavLink className="navlink" exact to="/reservations">Kup bilet</NavLink>
+                            <NavLink className="navlinkMain" exact to="/reservations">Kup bilet</NavLink>
                             <div className="buttonbg"></div>
                         </div>
                     </section>
