@@ -56,3 +56,10 @@ export const saveFormData = (formData) => {
         formData:formData
     };
 }
+export const saveFormPart = (formPart) => {
+    return {
+        type: actionTypes.SAVE_FORM_PART,
+        formPart:formPart
+    };
+}
+

@@ -1,1 +1,1 @@
-export {fetchMovie,seatPicked,saveFormData,setActiveHour} from './main';
+export {fetchMovie,seatPicked,saveFormData,setActiveHour,saveFormPart} from './main';

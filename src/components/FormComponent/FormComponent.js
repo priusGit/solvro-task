@@ -3,7 +3,7 @@ import './FormComponent.css';
 import * as actions from '../../store/actions/index';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { NavLink,Redirect,withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Auxi from '../../hoc/Auxi'
 class FormComponent extends Component {
     componentDidMount() {
@@ -116,9 +116,7 @@ class FormComponent extends Component {
         this.setState({ reservationForm: updatedreservationForm});
     }
     reservationHandler = (event) => {
-        console.log("idk an")
         event.preventDefault();
-        console.log("asdasd")
         this.props.saveFormData(this.state.reservationForm);
         this.props.history.push("/summary")
     }

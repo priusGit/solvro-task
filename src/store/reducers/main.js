@@ -35,6 +35,15 @@ const saveFormData = (state, action) => {
             formData: UserData
         });
 };
+const saveFormPart = (state, action) => {
+    const UserData = {};
+        for (let formElementIdentifier in action.formData) {
+            UserData[formElementIdentifier] = action.formData[formElementIdentifier].value;
+        }
+        return updateObject(state, {
+            formData: UserData
+        });
+};
 const fetchMovieSuccess = (state, action) => {
     return updateObject(state, {title:action.movieData.title,sessions:action.movieData.sessions,arrangement:action.movieData.arrangement});
 };
@@ -83,6 +92,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_ITEM: return addItem(state, action);
         case actionTypes.SET_ACTIVE_HOUR: return setActiveHour(state, action);
         case actionTypes.SAVE_FORM_DATA: return saveFormData(state, action);
+        case actionTypes.SAVE_FORM_PART: return saveFormPart(state, action);
         default: return state;
     }
 };
