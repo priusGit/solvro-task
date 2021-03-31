@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import './Summary.css';
 import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 import Auxi from '../../hoc/Auxi'
 class Summary extends Component {
     componentDidMount() {
             window.scrollTo(0, 0);
     }
     state = {
-        activeHour:false,
-        changeName:false,
-        changeNum:false,
-        changeEmail:false,
-        changeDisc:false,
+        changeForm:false,
         reservationForm: {
             name: {
                 elementConfig: {
@@ -71,25 +68,8 @@ class Summary extends Component {
         discShowing:false
     }
 
-    showDiscounts = (e,name) => {
-        switch(name){
-            case "name":{
-                this.setState({changeName:!this.state.changeName});
-                break;
-            }
-            case "number":{
-                this.setState({changeNum:!this.state.changeNum});break;
-            }
-            case "email":{
-                this.setState({changeEmail:!this.state.changeEmail});break;
-            }
-            case "discount":{
-                this.setState({changeDisc:!this.state.changeDisc});break;
-            }
-            default:{
-                break;
-            }
-        }
+    showInputs = () => {
+        this.setState({changeForm:!this.state.changeForm});
     }
 
     inputChangedHandler = (elementType, event, inputIdentifier) => {
@@ -103,6 +83,12 @@ class Summary extends Component {
         updatedreservationForm[inputIdentifier] = updatedFormElement;
         this.setState({ reservationForm: updatedreservationForm});
     }
+    reservationHandler = (e) => {
+        e.preventDefault();
+        this.showInputs();
+        this.props.saveFormPart(this.state.reservationForm);
+    }
+
     render() {
         const formElementsArray = [];
         for (let key in this.state.reservationForm) {
@@ -114,25 +100,23 @@ class Summary extends Component {
         let form;
         if(this.props.userData){
             form = (
-                <form className="form">
+                <form className="form" onSubmit={e => this.reservationHandler(e)}>
+                    {this.state.changeForm?<button type="submit" className="save">Zapisz</button>:<button type="submit">Edytuj</button>}
                     <div>
-                    {this.state.changeName?<button  type="button" className="save"onClick={(e) => this.showDiscounts(e,"name")}>Zapisz</button>:<button type="button" onClick={(e) => this.showDiscounts(e,"name")}>Edytuj</button>}
                         <p>Imię i nazwisko: </p>
-                        {this.state.changeName?<Auxi>
-                            <input key="name" type="text" placeholder="Imię" required  onChange={(event) => this.inputChangedHandler("text", event, "name")}/><input key="surname" type="text" placeholder="Nazwisko" required onChange={(event) => this.inputChangedHandler("text", event, "surname")}/></Auxi>:<p>{this.props.userData.name +" "+this.props.userData.surName}</p>}
+                        {this.state.changeForm?<Auxi>
+                            <input key="name" type="text" pattern="[a-zA-Z]+" placeholder={this.props.userData.name} onChange={(event) => this.inputChangedHandler("text", event, "name")}/><input key="surname" type="text" placeholder={this.props.userData.surName} pattern="[a-zA-Z]+" onChange={(event) => this.inputChangedHandler("text", event, "surName")}/></Auxi>:<p>{this.props.userData.name +" "+this.props.userData.surName}</p>}
                     </div>
                     <div>
-                    {this.state.changeNum?<button type="button" className="save"  onClick={(e) => this.showDiscounts(e,"number")}>Zapisz</button>:<button type="button" onClick={(e) => this.showDiscounts(e,"number")}>Edytuj</button>}
                     <p>Numer telefonu: </p>
-                        {this.state.changeNum?<input key="number" type="text" placeholder="Numer telefonu" required onChange={(event) => this.inputChangedHandler("text", event, "phoneNumber")}/>:<p>{this.props.userData.phoneNumber}</p>}
+                        {this.state.changeForm?<input key="number"  type="text" placeholder={this.props.userData.phoneNumber} onChange={(event) => this.inputChangedHandler("text", event, "phoneNumber")}/>:<p>{this.props.userData.phoneNumber}</p>}
                     </div>
                     <div>
-                    {this.state.changeEmail?<button type="button" className="save" onClick={(e) => this.showDiscounts(e,"email")}>Zapisz</button>:<button type="button" onClick={(e) => this.showDiscounts(e,"email")}>Edytuj</button>}
                     <p>E-mail: </p>
-                        {this.state.changeEmail?<input key="email" type="text" placeholder="E-mail" required onChange={(event) => this.inputChangedHandler("text", event, "email")}/>:<p>{this.props.userData.email}</p>}
+                        {this.state.changeForm?<input key="email" type="text" placeholder={this.props.userData.email} onChange={(event) => this.inputChangedHandler("text", event, "email")}/>:<p>{this.props.userData.email}</p>}
                     </div>
                     <div>
-                    <button type="button">Edytuj</button><p>Zniżka: </p><p>{this.props.userData.discounts}</p><div></div>
+                   <p>Zniżka: </p><p>{this.props.userData.discounts}</p><div></div>
                     </div>
                     <ul>
                                 <li>Wybrane miejsca:</li>
@@ -150,6 +134,7 @@ class Summary extends Component {
         )
     }
 }
+
 const mapStateToProps = state => {
     return {
         userData: state.formData,
@@ -157,4 +142,10 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, null)(Summary);
+const mapDispatchToProps = dispatch => {
+    return {
+        saveFormPart: (data) => dispatch(actions.saveFormPart(data))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Summary);

@@ -58,8 +58,8 @@ export const saveFormData = (formData) => {
 }
 export const saveFormPart = (formPart) => {
     return {
-        type: actionTypes.SAVE_FORM_PART,
-        formPart:formPart
+        type: actionTypes.SAVE_SOME_DATA,
+        formPart: formPart
     };
 }
 
