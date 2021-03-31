@@ -27,6 +27,7 @@
 .summary>.form>div{
     display: flex;
     margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 25px;
 }
 .form>div div{
@@ -34,4 +35,46 @@
 }
 .summary li{
     font-size: 30px;
+    margin: 0 5px;
 }
+@media (max-width:400px)
+{   
+    .summary form{
+        margin-top: 10px;
+    }
+    .summary>.form>div{
+        display: inline-block;
+        font-size: 20px;
+    }
+    .summary>.form>div>p{
+        margin-bottom: 20px;
+    }
+    .summary li{
+        font-size: 20px;
+        margin: 0 3px;
+    }
+}
+@media (min-width:401px) and (max-width:480px)
+{
+    .summary form{
+        margin-top: 10px;
+    }
+    .summary>.form>div{
+        display: inline-block;
+        font-size: 20px;
+        width: 100%;
+    }
+    .summary>.form>div>p{
+        margin-bottom: 20px;
+    }
+    .summary li{
+        font-size: 20px;
+    }
+}
+@media (max-width:768px)
+{
+    .summary h1{
+        margin-top: 30px;
+    }
+}
+        

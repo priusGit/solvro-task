@@ -35,7 +35,7 @@ class Summary extends Component {
         let form = (
             <form className="form">
                 <div><p>Imię i nazwisko: {this.props.userData.name} {this.props.userData.surName}</p><div></div><button>Edytuj</button></div>
-               <div> <p>Numer telefonu: {this.props.userData.phoneNumber}</p><div></div><div></div><button>Edytuj</button></div>
+                <div><p>Numer telefonu: {this.props.userData.phoneNumber}</p><div></div><div></div><button>Edytuj</button></div>
                 <div><p>E-Mail: {this.props.userData.email}</p><div></div><button>Edytuj</button></div>
                 <div><p>Zniżka: {this.props.userData.discounts}</p><div></div><button>Edytuj</button></div>
                 <ul>

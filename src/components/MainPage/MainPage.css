@@ -4,6 +4,8 @@
     width: 100vw;
     background-size: cover; 
     background-position: center;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 .mainPageOverlay{
     height: 100%;
@@ -22,6 +24,7 @@
     font-size: 60px;
     color: white;
     margin-bottom: 30px;
+    text-align: left;
 }
 .movieInfo p{
     font-size: 30px;
@@ -55,3 +58,65 @@
     top: 0;
     left: 0;
 }
+@media (max-width:400px)
+{
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 40px;
+    }
+    .navlinkMain{padding: 15px 20px;}
+}
+@media (min-width:401px) and (max-width:480px)
+{
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 40px;
+    }
+    .navlinkMain{padding: 15px 20px;}
+}
+@media (max-width:570px) and (orientation:landscape)
+{
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 30px;
+        width: 50vw;
+    }
+    .navlinkMain{padding: 10px 15px;}
+}
+@media (min-width:571px) and (max-width:600px) and (orientation:landscape)
+{
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 30px;
+        width: 50vw;
+    }
+    .navlinkMain{padding: 15px 20px;}
+}
+@media (min-width:601px) and (max-width:1023px) and (orientation:landscape)
+{
+    
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 40px;
+        width: 50vw;
+    }
+    .navlinkMain{padding: 15px 20px;}
+}
+        
+
+        

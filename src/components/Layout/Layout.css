@@ -8,6 +8,9 @@
     top: 0;
     left: 0;
     z-index: 5;
+    background: rgb(18, 18, 26);
+    width: 100vw;
+    border-bottom: 3px solid rgb(28, 28, 41);;
 }
 li{
     display: inline-block;

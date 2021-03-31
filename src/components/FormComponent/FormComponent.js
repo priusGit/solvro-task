@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import './FormComponent.css';
 import * as actions from '../../store/actions/index';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink,Redirect,withRouter } from 'react-router-dom';
 import Auxi from '../../hoc/Auxi'
 class FormComponent extends Component {
+    componentDidMount() {
+        window.scrollTo(0, 0);
+}
     state = {
         reservationForm: {
             name: {
@@ -19,7 +23,8 @@ class FormComponent extends Component {
                     required: true
                 },
                 valid: false,
-                touched: false
+                touched: false,
+                pattern:"[a-zA-Z]+"
             },
             surName: {
                 label: "Nazwisko: *",
@@ -33,7 +38,8 @@ class FormComponent extends Component {
                     required: true
                 },
                 valid: false,
-                touched: false
+                touched: false,
+                pattern:"[a-zA-Z]+"
             },
             phoneNumber: {
                 label: "Numer telefonu: *",
@@ -79,9 +85,25 @@ class FormComponent extends Component {
                 touched: false
             }
         },
-        activeHour:false
+        activeHour:false,
+        discountsNames:["Studencka (-50%)","Uczniowska (-25%)","Dla Seniora (-34%)","PLANdemia (+200%)"],
+        discShowing:false
     }
 
+    showDiscounts = (e) => {
+        this.setState({discShowing:!this.state.discShowing});
+    }
+    setPickedDiscount = (discName) => {
+        const updatedreservationForm = {
+            ...this.state.reservationForm
+        };
+        const updatedFormElement = {
+            ...updatedreservationForm.discounts
+        };
+        updatedFormElement.value = discName;
+        updatedreservationForm.discounts= updatedFormElement;
+        this.setState({reservationForm:updatedreservationForm});
+    }
     inputChangedHandler = (elementType, event, inputIdentifier) => {
         const updatedreservationForm = {
             ...this.state.reservationForm
@@ -93,6 +115,14 @@ class FormComponent extends Component {
         updatedreservationForm[inputIdentifier] = updatedFormElement;
         this.setState({ reservationForm: updatedreservationForm});
     }
+    reservationHandler = (event) => {
+        console.log("idk an")
+        event.preventDefault();
+        console.log("asdasd")
+        this.props.saveFormData(this.state.reservationForm);
+        this.props.history.push("/summary")
+    }
+
     render() {
         const formElementsArray = [];
         for (let key in this.state.reservationForm) {
@@ -101,28 +131,37 @@ class FormComponent extends Component {
                 config: this.state.reservationForm[key]
             });
         }
-        ///zrobić to normalnie, bez tej listy, z mapowaniem i generowaniem jakichś divów czy li czy coś
+        let discounts = (
+            this.state.discountsNames.map(discName => (
+                <li onClick={(e) => {this.setPickedDiscount(discName);this.showDiscounts(e)}} className={classNames(
+                    "discount", 
+                    this.state.reservationForm.discounts.value===discName ? "selectedDisc" : "" 
+                  )} key={discName}>{discName}</li>
+            ))
+        )
         let form = (
-            <form className="form">
+            <form className="form" onSubmit={this.reservationHandler}>
                 {formElementsArray.map((formElement,index) => (
                     <div key={index}>
-                    <label>{formElement.config.label}</label>
                     {formElement.config.elementConfig.type==="list"?
                     <Auxi>
-                        <input key={formElement.id} placeholder={formElement.config.elementConfig.placeholder} value={formElement.config.value} id={formElement.config.label} required={formElement.config.validation.required} onChange={(event) => this.inputChangedHandler(formElement.config.elementType, event, formElement.id)} list="listOfDiscounts"></input>
-                        <datalist id="listOfDiscounts">
-                    <option value="Edge"/>
-                    <option value="Firefox"/>
-                    <option value="Chrome"/>
-                    <option value="Opera"/>
-                    <option value="Safari"/>
-                    </datalist>
+                    <label className="labelDisc"onClick={e => this.showDiscounts(e)}>{formElement.config.label}</label><p onClick={e => this.showDiscounts(e)} className={classNames(
+                    "triangle", 
+                    this.state.discShowing? "activeTriangle" : "" 
+                  )}>▶</p>
+                    <ul className="ulDiscounts">
+                        {this.state.discShowing?discounts:null}
+                    </ul>
                     </Auxi>
                     :
-                    <input key={formElement.id} type={formElement.config.elementConfig.type} placeholder={formElement.config.elementConfig.placeholder} value={formElement.config.value} id={formElement.config.label} required={formElement.config.validation.required} onChange={(event) => this.inputChangedHandler(formElement.config.elementType, event, formElement.id)}></input>}
+                    <Auxi>
+                    <label>{formElement.config.label}</label>
+                    <input key={formElement.id} type={formElement.config.elementConfig.type} placeholder={formElement.config.elementConfig.placeholder} value={formElement.config.value} id={formElement.config.label} required={formElement.config.validation.required} onChange={(event) => this.inputChangedHandler(formElement.config.elementType, event, formElement.id)} pattern={formElement.config.pattern?formElement.config.pattern:null}
+                    ></input>
+                    </Auxi>}
                     </div>
                 ))}
-                <NavLink className="formButton" onClick={() => this.props.saveFormData(this.state.reservationForm)} exact to="/summary">ZAREZERWUJ!</NavLink>
+                <button type="submit" className="formButton">ZAREZERWUJ</button>
             </form>
         );
         return (
@@ -139,4 +178,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(null, mapDispatchToProps)(FormComponent);
+export default connect(null, mapDispatchToProps)(withRouter(FormComponent));
