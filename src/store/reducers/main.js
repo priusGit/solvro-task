@@ -36,28 +36,20 @@ const saveFormData = (state, action) => {
         });
 };
 const saveFormPart = (state, action) => {
-    console.log(state.formData);
-    console.log(action.formPart);
-    //Generalnie rzecz ujmując to powinno działać, ale stan mi się czyści do zera z jakiegoś powodu. Do rozwiązania
-
-    // console.log(state.formData[3]);
-    // const UserData = {};
-    //     for (let formElementIdentifier in action.formPart) {
-    //         if(action.formPart[formElementIdentifier].value==="")
-    //         {
-    //             UserData[formElementIdentifier] =  state.formData[formElementIdentifier]
-    //             console.log(state.formData[formElementIdentifier]);
-    //         }
-    //         else{
-    //             UserData[formElementIdentifier] = action.formPart[formElementIdentifier].value;
-    //             console.log(action.formPart[formElementIdentifier].value);
-    //         }
-    //     }
-        // console.log(action.formPart);
-        // console.log(UserData);
-        // return updateObject(state, {
-        //     formData: UserData
-        // });
+    const UserData = {};
+        for (let formElementIdentifier in action.formPart) {
+            if(action.formPart[formElementIdentifier].value==="")
+            {
+                UserData[formElementIdentifier] =  state.formData[formElementIdentifier]
+            }
+            else{
+                UserData[formElementIdentifier] = action.formPart[formElementIdentifier].value;
+            }
+        }
+        console.log(UserData);
+        return updateObject(state, {
+            formData: UserData
+        }); 
 };
 const fetchMovieSuccess = (state, action) => {
     return updateObject(state, {title:action.movieData.title,sessions:action.movieData.sessions,arrangement:action.movieData.arrangement});
