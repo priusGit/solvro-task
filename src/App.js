@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Switch, withRouter, Route } from 'react-router-dom';
-import './App.css';
-import MainPage from './components/MainPage/MainPage';
-import ReservationsPage from './components/ResevationsPage/ReservationsPage';
-import Auxi from './hoc/Auxi';
-import Layout from './components/Layout/Layout'
-import Summary from './components/Summary/Summary'
+import React, { Component } from "react";
+import { Switch, withRouter, Route } from "react-router-dom";
+import "./App.css";
+import MainPage from "./components/MainPage/MainPage";
+import ReservationsPage from "./components/ResevationsPage/ReservationsPage";
+import Auxi from "./hoc/Auxi";
+import Layout from "./components/Layout/Layout";
+import Summary from "./components/Summary/Summary";
 class App extends Component {
   render() {
     let routes = (
@@ -17,11 +17,9 @@ class App extends Component {
     );
     return (
       <Auxi>
-        <Layout>
-          {routes}
-        </Layout>
+        <Layout>{routes}</Layout>
       </Auxi>
-    )
+    );
   }
 }
 export default withRouter(App);
