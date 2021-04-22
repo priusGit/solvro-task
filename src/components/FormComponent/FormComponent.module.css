@@ -92,6 +92,14 @@ input:focus {
   transform: rotate(0);
   transition: 0.07s linear;
   user-select: none;
+  color: white;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 15px;
+}
+.triangle:focus {
+  outline: none;
 }
 .activeTriangle {
   transform: rotate(90deg);

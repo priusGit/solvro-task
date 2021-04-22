@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Summary.css";
+import styles from "./Summary.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Auxi from "../../hoc/Auxi";
@@ -41,6 +41,7 @@ class Summary extends Component {
         validation: {
           required: true,
         },
+        pattern: "[0-9]{8,14}",
       },
       email: {
         elementConfig: {
@@ -105,11 +106,11 @@ class Summary extends Component {
     if (this.props.userData) {
       form = (
         <form
-          className="form"
+          className={styles.form}
           onSubmit={(event) => this.reservationHandler(event)}
         >
           {this.state.changeForm ? (
-            <button type="submit" className="save">
+            <button type="submit" className={styles.save}>
               Zapisz
             </button>
           ) : (
@@ -150,6 +151,7 @@ class Summary extends Component {
               <input
                 key="number"
                 type="text"
+                pattern="[0-9]{8,14}"
                 placeholder={this.props.userData.phoneNumber}
                 onChange={(event) =>
                   this.inputChangedHandler("text", event, "phoneNumber")
@@ -164,7 +166,7 @@ class Summary extends Component {
             {this.state.changeForm ? (
               <input
                 key="email"
-                type="text"
+                type="email"
                 placeholder={this.props.userData.email}
                 onChange={(event) =>
                   this.inputChangedHandler("text", event, "email")
@@ -189,7 +191,7 @@ class Summary extends Component {
       );
     }
     return (
-      <section className="summary">
+      <section className={styles.summary}>
         <h1>Podsumowanie</h1>
         {form}
       </section>

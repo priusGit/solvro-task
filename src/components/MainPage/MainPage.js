@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import "./MainPage.css";
+import styles from "./MainPage.module.css";
 class MainPage extends Component {
   render() {
     return (
-      <section className="mainPage">
-        <section className="mainPageOverlay">
-          <div className="movieInfo">
+      <section className={styles.mainPage}>
+        <section className={styles.mainPageOverlay}>
+          <div className={styles.movieInfo}>
             <p>Już od 15 marca!</p>
             <h1>Wojownicy Solvro, Więzień KNSI</h1>
-            <NavLink className="navlinkMain" exact to="/reservations">
+            <NavLink className={styles.navlinkMain} exact to="/reservations">
               Kup bilet
             </NavLink>
-            <div className="buttonbg" />
+            <div className={styles.buttonbg} />
           </div>
         </section>
       </section>

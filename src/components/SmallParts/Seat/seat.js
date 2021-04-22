@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
-import "./Seat.css";
+import styles from "./Seat.module.css";
 
 class Seat extends Component {
   componentDidMount() {
@@ -28,8 +28,9 @@ class Seat extends Component {
       return (
         <li
           className={classNames(
-            "seat free",
-            this.state.active ? "selectedSeat" : ""
+            styles.seat,
+            styles.free,
+            this.state.active ? styles.selectedSeat : ""
           )}
           onClick={(event) => {
             this.toggleSeat(event);
@@ -40,7 +41,11 @@ class Seat extends Component {
         </li>
       );
     } else {
-      return <li className="seat taken">{this.props.number}</li>;
+      return (
+        <li className={classNames(styles.seat, styles.taken)}>
+          {this.props.number}
+        </li>
+      );
     }
   }
 }

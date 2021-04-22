@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./ReservationsPage.css";
+import styles from "./ReservationsPage.module.css";
 import classNames from "classnames";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
@@ -29,8 +29,8 @@ class ReservationsPage extends Component {
         return (
           <li
             className={classNames(
-              "datePick",
-              this.props.activeHour === dateElement ? "selectedHour" : ""
+              styles.datePick,
+              this.props.activeHour === dateElement ? styles.selectedHour : ""
             )}
             onClick={() => this.props.setActiveHour(dateElement)}
             key={dateElement}
@@ -41,8 +41,8 @@ class ReservationsPage extends Component {
       });
       const seats = this.props.arrangement;
       const seatMap = Object.keys(seats).map((row) => (
-        <ul className="seatRow" key={row}>
-          <li className="rowName">{row}</li>
+        <ul className={styles.seatRow} key={row}>
+          <li className={styles.rowName}>{row}</li>
           {seats[row].map((seat, index) => (
             <Seat
               key={index}
@@ -55,10 +55,10 @@ class ReservationsPage extends Component {
       ));
       if (this.state.pageOverlayStatus) {
         pageOverlay = (
-          <div className="pageOverlay">
+          <div className={styles.pageOverlay}>
             <svg
               onClick={(event) => this.showForm(event)}
-              className="xSign"
+              className={styles.xSign}
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
@@ -74,15 +74,15 @@ class ReservationsPage extends Component {
 
       if (this.props.activeHour != null) {
         screeningRoomView = (
-          <div className="screeningRoom">
+          <div className={styles.screeningRoom}>
             <h2>Wybierz miejsca do zarezerwowania</h2>
-            <div className="screen"></div>
+            <div className={styles.screen}></div>
             {seatMap}
           </div>
         );
         if (this.props.seatsPicked.length !== 0) {
           bottomBar = (
-            <div className="bottomBar">
+            <div className={styles.bottomBar}>
               <ul>
                 <li>Wybrane miejsca:</li>
                 {this.props.seatsPicked.map((seatMini, index) => (
@@ -90,7 +90,10 @@ class ReservationsPage extends Component {
                 ))}
               </ul>
               <div />
-              <button className="toForm" onClick={(e) => this.showForm(e)}>
+              <button
+                className={styles.toForm}
+                onClick={(e) => this.showForm(e)}
+              >
                 Dalej
               </button>
             </div>
@@ -99,12 +102,14 @@ class ReservationsPage extends Component {
       }
     }
     return (
-      <section className="reservationsPage">
+      <section className={styles.reservationsPage}>
         <div
-          className={classNames(this.state.pageOverlayStatus ? "blurry" : "")}
+          className={classNames(
+            this.state.pageOverlayStatus ? styles.blurry : ""
+          )}
         >
           <h1>{this.props.title}</h1>
-          <ul className="datePicker">{datePick}</ul>
+          <ul className={styles.datePicker}>{datePick}</ul>
           {screeningRoomView}
           {bottomBar}
         </div>

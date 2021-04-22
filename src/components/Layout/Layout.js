@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import "./Layout.css";
+import styles from "./Layout.module.css";
 import Auxi from "../../hoc/Auxi";
 class Layout extends Component {
   render() {
     return (
       <Auxi>
         <main>
-          <div className="topbar">
+          <div className={styles.topbar}>
             <ul>
-              <li className="fake">fake</li>
-              <li className="cinema">cinema</li>
+              <li className={styles.fake}>fake</li>
+              <li className={styles.cinema}>cinema</li>
             </ul>
           </div>
           {this.props.children}

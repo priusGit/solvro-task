@@ -1,0 +1,112 @@
+.summary {
+  min-height: 100vh;
+  width: 100%;
+  background: rgb(18, 18, 26);
+  padding-top: 60px;
+}
+.summary p {
+  margin-right: 5px;
+}
+.summary button {
+  display: inline;
+  outline: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  border: none;
+  background-color: rgb(251, 158, 37);
+  font-size: 15px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.form {
+  margin-top: 40px;
+  color: white;
+  margin-left: 50%;
+  width: 40vw;
+  transform: translateX(-50%);
+  padding-bottom: 50px;
+}
+.summary button:focus {
+  display: inline;
+  outline: none;
+  border: none;
+}
+.summary > .form > div {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 40px;
+  font-size: 25px;
+}
+.summary .form input {
+  width: auto;
+  margin-left: 5px;
+  flex-grow: 2;
+}
+.form > div input + div {
+  display: none;
+}
+.summary li {
+  font-size: 30px;
+  margin: 0 5px;
+}
+.summary .form {
+  width: 50vw;
+}
+.summary .form button.save {
+  background-color: rgb(16, 109, 24);
+}
+@media (max-width: 400px) {
+  .summary form {
+    margin-top: 10px;
+  }
+  .summary > .form > div {
+    display: inline-block;
+    font-size: 20px;
+  }
+  .summary > .form > div > p {
+    margin-bottom: 20px;
+  }
+  .summary li {
+    font-size: 20px;
+    margin: 0 3px;
+  }
+  .form {
+    width: 80vw;
+  }
+}
+@media (min-width: 401px) and (max-width: 480px) {
+  .summary form {
+    margin-top: 10px;
+  }
+  .summary > .form > div {
+    display: inline-block;
+    font-size: 20px;
+    width: 100%;
+  }
+  .form {
+    width: 80vw;
+  }
+  .summary > .form > div > p {
+    margin-bottom: 20px;
+  }
+  .summary li {
+    font-size: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .summary h1 {
+    margin-top: 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .summary h1 {
+    margin-top: 30px;
+  }
+  .summary .form {
+    width: 80vw;
+  }
+}

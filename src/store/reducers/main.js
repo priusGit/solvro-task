@@ -18,7 +18,10 @@ const setActiveHour = (state, action) => {
   } else {
     hourVar = action.activeHour;
   }
-  return updateObject(state, { activeHour: hourVar });
+  return {
+    ...state,
+    activeHour: hourVar,
+  };
 };
 const fetchMovieStart = (state, action) => {
   return updateObject(state, { loading: true });
@@ -29,9 +32,10 @@ const saveFormData = (state, action) => {
     UserData[formElementIdentifier] =
       action.formData[formElementIdentifier].value;
   }
-  return updateObject(state, {
+  return {
+    ...state,
     formData: UserData,
-  });
+  };
 };
 const saveFormPart = (state, action) => {
   const UserData = {};
@@ -43,20 +47,25 @@ const saveFormPart = (state, action) => {
         action.formPart[formElementIdentifier].value;
     }
   }
-  return updateObject(state, {
+  return {
+    ...state,
     formData: UserData,
-  });
+  };
 };
 const fetchMovieSuccess = (state, action) => {
-  return updateObject(state, {
+  return {
+    ...state,
     title: action.movieData.title,
     sessions: action.movieData.sessions,
     arrangement: action.movieData.arrangement,
-  });
+  };
 };
 
 const fetchMovieFail = (state, action) => {
-  return updateObject(state, { loading: false });
+  return {
+    ...state,
+    loading: false,
+  };
 };
 const addItem = (state, action) => {
   let newSeat = { seatRow: action.seatRow, seatNum: action.seatNum },
@@ -65,9 +74,10 @@ const addItem = (state, action) => {
 
   if (state.seatsPicked.length === 0) {
     let newState = [...state.seatsPicked];
-    return updateObject(state, {
+    return {
+      ...state,
       seatsPicked: newState.concat(newSeat),
-    });
+    };
   }
 
   state.seatsPicked.map((seat, index) => {
@@ -81,13 +91,15 @@ const addItem = (state, action) => {
   if (found) {
     let newState = [...state.seatsPicked];
     newState.splice(indexFound, 1);
-    return updateObject(state, {
+    return {
+      ...state,
       seatsPicked: newState,
-    });
+    };
   } else {
-    return updateObject(state, {
+    return {
+      ...state,
       seatsPicked: state.seatsPicked.concat(newSeat),
-    });
+    };
   }
 };
 

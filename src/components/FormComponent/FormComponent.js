@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./FormComponent.css";
+import styles from "./FormComponent.module.css";
 import * as actions from "../../store/actions/index";
 import classNames from "classnames";
 import { connect } from "react-redux";
@@ -55,6 +55,7 @@ class FormComponent extends Component {
         },
         valid: false,
         touched: false,
+        pattern: "[0-9]{8,14}",
       },
       email: {
         label: "E-mail: *",
@@ -133,8 +134,6 @@ class FormComponent extends Component {
         id: key,
         config: this.state.reservationForm[key],
       });
-      console.log(this.state.reservationForm);
-      console.log(formElementsArray);
     }
     const discounts = this.state.discountsNames.map((discName) => (
       <li
@@ -143,9 +142,9 @@ class FormComponent extends Component {
           this.showDiscounts(e);
         }}
         className={classNames(
-          "discount",
+          styles.discount,
           this.state.reservationForm.discounts.value === discName
-            ? "selectedDisc"
+            ? styles.selectedDisc
             : ""
         )}
         key={discName}
@@ -154,27 +153,28 @@ class FormComponent extends Component {
       </li>
     ));
     const form = (
-      <form className="form" onSubmit={this.reservationHandler}>
+      <form className={styles.form} onSubmit={this.reservationHandler}>
         {formElementsArray.map((formElement, index) => (
           <div key={index}>
             {formElement.config.elementConfig.type === "list" ? (
               <Auxi>
                 <label
-                  className="labelDisc"
+                  className={styles.labelDisc}
                   onClick={(e) => this.showDiscounts(e)}
                 >
                   {formElement.config.label}
                 </label>
-                <p
+                <button
+                  type="button"
                   onClick={(e) => this.showDiscounts(e)}
                   className={classNames(
-                    "triangle",
-                    this.state.discShowing ? "activeTriangle" : ""
+                    styles.triangle,
+                    this.state.discShowing ? styles.activeTriangle : ""
                   )}
                 >
                   ▶
-                </p>
-                <ul className="ulDiscounts">
+                </button>
+                <ul className={styles.ulDiscounts}>
                   {this.state.discShowing ? discounts : null}
                 </ul>
               </Auxi>
@@ -205,13 +205,13 @@ class FormComponent extends Component {
             )}
           </div>
         ))}
-        <button type="submit" className="formButton">
+        <button type="submit" className={styles.formButton}>
           ZAREZERWUJ
         </button>
       </form>
     );
     return (
-      <section className="formComponent">
+      <section className={styles.formComponent}>
         <h1>Podaj dane do biletu</h1>
         {form}
       </section>
