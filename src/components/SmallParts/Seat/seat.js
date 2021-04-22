@@ -2,22 +2,25 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
-import "./seat.css";
+import "./Seat.css";
 
 class Seat extends Component {
   componentDidMount() {
-    this.props.seatsPicked.map((obj) => {
-      if (obj.seatRow === this.props.row && obj.seatNum === this.props.number) {
+    this.props.seatsPicked.map((pickedSeat) => {
+      if (
+        pickedSeat.seatRow === this.props.row &&
+        pickedSeat.seatNum === this.props.number
+      ) {
         this.setState({ active: true });
       }
-      return obj;
+      return pickedSeat;
     });
   }
   state = {
     active: false,
   };
 
-  toggleSeat = (e) => {
+  toggleSeat = (event) => {
     this.setState({ active: !this.state.active });
   };
   render() {
@@ -28,8 +31,8 @@ class Seat extends Component {
             "seat free",
             this.state.active ? "selectedSeat" : ""
           )}
-          onClick={(e) => {
-            this.toggleSeat(e);
+          onClick={(event) => {
+            this.toggleSeat(event);
             this.props.seatPicked(this.props.row, this.props.number);
           }}
         >
@@ -44,8 +47,8 @@ class Seat extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    seatPicked: (seatRow, seatNum) =>
-      dispatch(actions.seatPicked(seatRow, seatNum)),
+    seatPicked: (seatRow, seatNumber) =>
+      dispatch(actions.seatPicked(seatRow, seatNumber)),
   };
 };
 const mapStateToProps = (state) => {

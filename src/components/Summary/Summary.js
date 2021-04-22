@@ -19,7 +19,7 @@ class Summary extends Component {
         validation: {
           required: true,
         },
-        pattern: "[a-zA-Z]+",
+        pattern: "\\p{L}+",
       },
       surName: {
         elementConfig: {
@@ -30,7 +30,7 @@ class Summary extends Component {
         validation: {
           required: true,
         },
-        pattern: "[a-zA-Z]+",
+        pattern: "\\p{L}+",
       },
       phoneNumber: {
         elementConfig: {
@@ -87,8 +87,8 @@ class Summary extends Component {
     updatedreservationForm[inputIdentifier] = updatedFormElement;
     this.setState({ reservationForm: updatedreservationForm });
   };
-  reservationHandler = (e) => {
-    e.preventDefault();
+  reservationHandler = (event) => {
+    event.preventDefault();
     this.showInputs();
     this.props.saveFormPart(this.state.reservationForm);
   };
@@ -104,7 +104,10 @@ class Summary extends Component {
     let form;
     if (this.props.userData) {
       form = (
-        <form className="form" onSubmit={(e) => this.reservationHandler(e)}>
+        <form
+          className="form"
+          onSubmit={(event) => this.reservationHandler(event)}
+        >
           {this.state.changeForm ? (
             <button type="submit" className="save">
               Zapisz
@@ -174,7 +177,7 @@ class Summary extends Component {
           <div>
             <p>Zniżka: </p>
             <p>{this.props.userData.discounts}</p>
-            <div></div>
+            <div />
           </div>
           <ul>
             <li>Wybrane miejsca:</li>

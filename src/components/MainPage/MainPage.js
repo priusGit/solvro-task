@@ -12,7 +12,7 @@ class MainPage extends Component {
             <NavLink className="navlinkMain" exact to="/reservations">
               Kup bilet
             </NavLink>
-            <div className="buttonbg"></div>
+            <div className="buttonbg" />
           </div>
         </section>
       </section>

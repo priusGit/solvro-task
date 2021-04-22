@@ -24,7 +24,7 @@ class FormComponent extends Component {
         },
         valid: false,
         touched: false,
-        pattern: "[a-zA-Z]+",
+        pattern: "\\p{L}+",
       },
       surName: {
         label: "Nazwisko: *",
@@ -39,7 +39,7 @@ class FormComponent extends Component {
         },
         valid: false,
         touched: false,
-        pattern: "[a-zA-Z]+",
+        pattern: "\\p{L}+",
       },
       phoneNumber: {
         label: "Numer telefonu: *",
@@ -133,8 +133,10 @@ class FormComponent extends Component {
         id: key,
         config: this.state.reservationForm[key],
       });
+      console.log(this.state.reservationForm);
+      console.log(formElementsArray);
     }
-    let discounts = this.state.discountsNames.map((discName) => (
+    const discounts = this.state.discountsNames.map((discName) => (
       <li
         onClick={(e) => {
           this.setPickedDiscount(discName);
@@ -151,7 +153,7 @@ class FormComponent extends Component {
         {discName}
       </li>
     ));
-    let form = (
+    const form = (
       <form className="form" onSubmit={this.reservationHandler}>
         {formElementsArray.map((formElement, index) => (
           <div key={index}>

@@ -3,7 +3,7 @@ import "./ReservationsPage.css";
 import classNames from "classnames";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
-import Seat from "../SmallParts/Seat/seat";
+import Seat from "../SmallParts/Seat/Seat";
 import FormComponent from "../FormComponent/FormComponent";
 class ReservationsPage extends Component {
   componentDidMount() {
@@ -14,18 +14,18 @@ class ReservationsPage extends Component {
     activeHour: false,
     pageOverlayStatus: false,
   };
-  showForm = (e) => {
+  showForm = (event) => {
     this.setState({ pageOverlayStatus: !this.state.pageOverlayStatus });
   };
   render() {
-    let datePick, seats, contentSeatMap, bottomBar, pageOverlay;
+    let datePick, screeningRoomView, bottomBar, pageOverlay;
     if (this.props.title) {
-      let dates = this.props.sessions;
+      const dates = this.props.sessions;
       datePick = dates.map((dateElement, index) => {
-        let date = new Date(dateElement);
-        let hour = date.getHours();
-        let minutes = date.getMinutes();
-        let finalText = hour + ":" + minutes;
+        const date = new Date(dateElement);
+        const hour = date.getHours();
+        const minutes = date.getMinutes();
+        const finalText = hour + ":" + minutes;
         return (
           <li
             className={classNames(
@@ -39,8 +39,8 @@ class ReservationsPage extends Component {
           </li>
         );
       });
-      seats = this.props.arrangement;
-      let seatMap = Object.keys(seats).map((row) => (
+      const seats = this.props.arrangement;
+      const seatMap = Object.keys(seats).map((row) => (
         <ul className="seatRow" key={row}>
           <li className="rowName">{row}</li>
           {seats[row].map((seat, index) => (
@@ -57,7 +57,7 @@ class ReservationsPage extends Component {
         pageOverlay = (
           <div className="pageOverlay">
             <svg
-              onClick={(e) => this.showForm(e)}
+              onClick={(event) => this.showForm(event)}
               className="xSign"
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -73,7 +73,7 @@ class ReservationsPage extends Component {
       //conditional rendering logic
 
       if (this.props.activeHour != null) {
-        contentSeatMap = (
+        screeningRoomView = (
           <div className="screeningRoom">
             <h2>Wybierz miejsca do zarezerwowania</h2>
             <div className="screen"></div>
@@ -89,7 +89,7 @@ class ReservationsPage extends Component {
                   <li key={index}>{seatMini.seatRow + seatMini.seatNum}</li>
                 ))}
               </ul>
-              <div></div>
+              <div />
               <button className="toForm" onClick={(e) => this.showForm(e)}>
                 Dalej
               </button>
@@ -105,7 +105,7 @@ class ReservationsPage extends Component {
         >
           <h1>{this.props.title}</h1>
           <ul className="datePicker">{datePick}</ul>
-          {contentSeatMap}
+          {screeningRoomView}
           {bottomBar}
         </div>
         {pageOverlay}

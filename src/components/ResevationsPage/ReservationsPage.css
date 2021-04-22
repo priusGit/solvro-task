@@ -143,7 +143,7 @@ h1 {
 
 .xSign {
   position: absolute;
-  top: 50px;
+  top: 90px;
   right: 50px;
   fill: white;
   transform: scale(1.5);
@@ -228,8 +228,6 @@ h1 {
   .pageOverlay {
     height: 200%;
     width: 100%;
-  }
-  .damnP {
   }
 }
 @media (max-width: 768px) {

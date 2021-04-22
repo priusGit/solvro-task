@@ -8,7 +8,7 @@ import Layout from "./components/Layout/Layout";
 import Summary from "./components/Summary/Summary";
 class App extends Component {
   render() {
-    let routes = (
+    const routes = (
       <Switch>
         <Route path="/" exact component={MainPage} />
         <Route path="/reservations" exact component={ReservationsPage} />

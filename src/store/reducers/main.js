@@ -43,7 +43,6 @@ const saveFormPart = (state, action) => {
         action.formPart[formElementIdentifier].value;
     }
   }
-  console.log(UserData);
   return updateObject(state, {
     formData: UserData,
   });
@@ -71,12 +70,12 @@ const addItem = (state, action) => {
     });
   }
 
-  state.seatsPicked.map((obj, index) => {
-    if (obj.seatRow === action.seatRow && obj.seatNum === action.seatNum) {
+  state.seatsPicked.map((seat, index) => {
+    if (seat.seatRow === action.seatRow && seat.seatNum === action.seatNum) {
       indexFound = index;
       found = true;
     }
-    return obj;
+    return seat;
   });
 
   if (found) {

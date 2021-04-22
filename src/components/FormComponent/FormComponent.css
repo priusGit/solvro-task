@@ -1,146 +1,140 @@
-.form{
-    margin-top: 40px;
-    color: white;
-    margin-left: 50%;
-    width: 40vw;
-    transform: translateX(-50%);
-    padding-bottom: 50px;
+.form {
+  margin-top: 40px;
+  color: white;
+  margin-left: 50%;
+  width: 40vw;
+  transform: translateX(-50%);
+  padding-bottom: 50px;
 }
-.formComponent h1{
-    font-size: 40px;
-    margin-top: 5%;
+.formComponent h1 {
+  font-size: 40px;
+  margin-top: 5%;
 }
-label{
-    font-size: 20px;
-    display: block;
-    text-align: left;
-    margin-top: 10px;
-    margin-bottom: 10px;
+label {
+  font-size: 20px;
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-input{
-    padding: 10px 20px;
-    width: 100%;
-    font-size: 19px;
-    border: none;
-    outline:none;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    color: #000000;
-    transition: 0.1s linear;
+input {
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 19px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #000000;
+  transition: 0.1s linear;
 }
-input:hover{
-    box-shadow: 0px 0px 17px rgb(207, 207, 207);
+input:hover {
+  box-shadow: 0px 0px 17px rgb(207, 207, 207);
 }
-.formButton{
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    margin-top: 30px;
-    padding: 15px 20px;
-    width: 80%;
-    margin-left: 10%;
-    font-size: 20px;
-    background-color:rgb(251, 158, 37);
-    color: #000000;
-    border: none;
-    box-shadow: 0px 0px 17px rgba(66,66,66,.29);
-    transition: 0.2s linear;
+.formButton {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 30px;
+  padding: 15px 20px;
+  width: 80%;
+  margin-left: 10%;
+  font-size: 20px;
+  background-color: rgb(251, 158, 37);
+  color: #000000;
+  border: none;
+  box-shadow: 0px 0px 17px rgba(66, 66, 66, 0.29);
+  transition: 0.2s linear;
 }
-.formButton:hover{
-    cursor: pointer;
-    box-shadow: 0px 0px 17px rgb(251, 158, 37);
-    color: white;
-    border: none;
-    outline:none;
+.formButton:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 17px rgb(251, 158, 37);
+  color: white;
+  border: none;
+  outline: none;
 }
-.formButton:focus{
-    border: none;
-    outline:none;
+.formButton:focus {
+  border: none;
+  outline: none;
 }
 input:focus {
-    outline:none;
+  outline: none;
 }
-.discount{
-    font-size: 25px;
-    display: block;
-    transition: 0.2s linear;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 5px;
-    padding-left: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.267);
-    cursor: pointer;
+.discount {
+  font-size: 25px;
+  display: block;
+  transition: 0.2s linear;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.267);
+  cursor: pointer;
 }
-.discount:hover{
-    background-color: rgba(255, 255, 255, 0.267);
+.discount:hover {
+  background-color: rgba(255, 255, 255, 0.267);
 }
-.selectedDisc{
-    background-color: rgba(251, 158, 37, 0.301);
+.selectedDisc {
+  background-color: rgba(251, 158, 37, 0.301);
 }
-.ulDiscounts{
-    transition: 0.2s linear;
+.ulDiscounts {
+  transition: 0.2s linear;
 }
-.labelDisc{
-    cursor: pointer;
-    display: inline-block;
-    user-select: none;
+.labelDisc {
+  cursor: pointer;
+  display: inline-block;
+  user-select: none;
 }
-.triangle{
-    margin-left: 10px;
-    cursor: pointer;
-    display: inline-block;
-    transform: rotate(0);
-    transition: 0.07s linear;
-    user-select: none;
+.triangle {
+  margin-left: 10px;
+  cursor: pointer;
+  display: inline-block;
+  transform: rotate(0);
+  transition: 0.07s linear;
+  user-select: none;
 }
-.activeTriangle{
-    transform: rotate(90deg);
+.activeTriangle {
+  transform: rotate(90deg);
 }
-@media (max-width:400px)
-{   
-    .formComponent h1{
-        margin-top: 120px;
-        font-size: 30px;
-    }
-    .xSign
-    {
-        top: 80px;
-        right: 20px;
-        transform: scale(1.2);
-    } 
-    .form{
-        width: 80vw;
-    }
+@media (max-width: 400px) {
+  .formComponent h1 {
+    margin-top: 120px;
+    font-size: 30px;
+  }
+  .xSign {
+    top: 80px;
+    right: 20px;
+    transform: scale(1.2);
+  }
+  .form {
+    width: 80vw;
+  }
 }
-@media (min-width:401px) and (max-width:480px)
-{
-    .formComponent h1{
-        margin-top: 150px;
-        font-size: 30px;
-    }
-    .form{
-        width: 80vw;
-    }
-    .xSign
-    {
-        top: 90px;
-        right: 30px;
-        transform: scale(1.2);
-    } 
+@media (min-width: 401px) and (max-width: 480px) {
+  .formComponent h1 {
+    margin-top: 150px;
+    font-size: 30px;
+  }
+  .form {
+    width: 80vw;
+  }
+  .xSign {
+    top: 90px;
+    right: 30px;
+    transform: scale(1.2);
+  }
 }
-@media (max-width:1366px)
-{
-    .formComponent h1{
-        margin-top: 150px;
-        font-size: 30px;
-    }
-    .form{
-        width: 80vw;
-    }
-    .xSign
-    {
-        top: 90px;
-        right: 30px;
-        transform: scale(1.2);
-    } 
+@media (max-width: 1366px) {
+  .formComponent h1 {
+    margin-top: 150px;
+    font-size: 30px;
+  }
+  .form {
+    width: 80vw;
+  }
+  .xSign {
+    top: 90px;
+    right: 30px;
+    transform: scale(1.2);
+  }
 }
