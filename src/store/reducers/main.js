@@ -29,8 +29,7 @@ const fetchMovieStart = (state, action) => {
 const saveFormData = (state, action) => {
   const UserData = {};
   for (let formElementIdentifier in action.formData) {
-    UserData[formElementIdentifier] =
-      action.formData[formElementIdentifier].value;
+    UserData[formElementIdentifier] = action.formData[formElementIdentifier];
   }
   return {
     ...state,
@@ -40,11 +39,10 @@ const saveFormData = (state, action) => {
 const saveFormPart = (state, action) => {
   const UserData = {};
   for (let formElementIdentifier in action.formPart) {
-    if (action.formPart[formElementIdentifier].value === "") {
+    if (action.formPart[formElementIdentifier] === "") {
       UserData[formElementIdentifier] = state.formData[formElementIdentifier];
     } else {
-      UserData[formElementIdentifier] =
-        action.formPart[formElementIdentifier].value;
+      UserData[formElementIdentifier] = action.formPart[formElementIdentifier];
     }
   }
   return {

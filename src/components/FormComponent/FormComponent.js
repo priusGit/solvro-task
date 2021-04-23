@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./FormComponent.module.css";
 import * as actions from "../../store/actions/index";
-import classNames from "classnames";
+// import classNames from "classnames";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Auxi from "../../hoc/Auxi";
@@ -10,6 +10,18 @@ class FormComponent extends Component {
     window.scrollTo(0, 0);
   }
   state = {
+    values: {
+      name: "",
+      surName: "",
+      phoneNumber: "",
+      email: "",
+      discount: "",
+    },
+    activeHour: false,
+    discShowing: false,
+  };
+
+  form = {
     reservationForm: {
       name: {
         label: "Imię: *",
@@ -18,7 +30,6 @@ class FormComponent extends Component {
           type: "text",
           placeholder: "Imię",
         },
-        value: "",
         validation: {
           required: true,
         },
@@ -33,7 +44,6 @@ class FormComponent extends Component {
           type: "text",
           placeholder: "Nazwisko",
         },
-        value: "",
         validation: {
           required: true,
         },
@@ -48,7 +58,6 @@ class FormComponent extends Component {
           type: "tel",
           placeholder: "Numer Telefonu",
         },
-        value: "",
         validation: {
           required: true,
           isNumeric: true,
@@ -64,7 +73,6 @@ class FormComponent extends Component {
           type: "email",
           placeholder: "E-mail",
         },
-        value: "",
         validation: {
           required: true,
         },
@@ -78,7 +86,6 @@ class FormComponent extends Component {
           type: "list",
           placeholder: "Zniżki:",
         },
-        value: "",
         validation: {
           required: false,
         },
@@ -86,79 +93,68 @@ class FormComponent extends Component {
         touched: false,
       },
     },
-    activeHour: false,
     discountsNames: [
       "Studencka (-50%)",
       "Uczniowska (-25%)",
       "Dla Seniora (-34%)",
       "PLANdemia (+200%)",
     ],
-    discShowing: false,
   };
 
   showDiscounts = (e) => {
     this.setState({ discShowing: !this.state.discShowing });
   };
-  setPickedDiscount = (discName) => {
-    const updatedreservationForm = {
-      ...this.state.reservationForm,
-    };
-    const updatedFormElement = {
-      ...updatedreservationForm.discounts,
-    };
-    updatedFormElement.value = discName;
-    updatedreservationForm.discounts = updatedFormElement;
-    this.setState({ reservationForm: updatedreservationForm });
-  };
+  // setPickedDiscount = (discName) => {
+  //   const updatedreservationForm = {
+  //     ...this.state.reservationForm,
+  //   };
+  //   const updatedFormElement = {
+  //     ...updatedreservationForm.discounts,
+  //   };
+  //   updatedFormElement.value = discName;
+  //   updatedreservationForm.discounts = updatedFormElement;
+  //   this.setState({ reservationForm: updatedreservationForm });
+  // };
   inputChangedHandler = (elementType, event, inputIdentifier) => {
-    const updatedreservationForm = {
-      ...this.state.reservationForm,
+    const updatedValues = {
+      ...this.state.values,
     };
-    const updatedFormElement = {
-      ...updatedreservationForm[inputIdentifier],
-    };
-    updatedFormElement.value = event.target.value;
-    updatedreservationForm[inputIdentifier] = updatedFormElement;
-    this.setState({ reservationForm: updatedreservationForm });
+    updatedValues[inputIdentifier] = event.target.value;
+    this.setState({ values: updatedValues });
   };
   reservationHandler = (event) => {
     event.preventDefault();
-    this.props.saveFormData(this.state.reservationForm);
+    this.props.saveFormData(this.state.values);
     this.props.history.push("/summary");
   };
 
   render() {
     const formElementsArray = [];
-    for (let key in this.state.reservationForm) {
+    for (let key in this.form.reservationForm) {
       formElementsArray.push({
         id: key,
-        config: this.state.reservationForm[key],
+        config: this.form.reservationForm[key],
       });
     }
-    const discounts = this.state.discountsNames.map((discName) => (
-      <li
-        onClick={(e) => {
-          this.setPickedDiscount(discName);
-          this.showDiscounts(e);
-        }}
-        className={classNames(
-          styles.discount,
-          this.state.reservationForm.discounts.value === discName
-            ? styles.selectedDisc
-            : ""
-        )}
-        key={discName}
-      >
-        {discName}
-      </li>
-    ));
+    // const discounts = this.form.discountsNames.map((discName) => (
+    //   <li
+    //     onClick={(e) => {
+    //       this.setPickedDiscount(discName);
+    //       this.showDiscounts(e);
+    //     }}
+    //     key={discName}
+    //   >
+    //     {discName}
+    //   </li>
+    // ));
     const form = (
       <form className={styles.form} onSubmit={this.reservationHandler}>
         {formElementsArray.map((formElement, index) => (
           <div key={index}>
             {formElement.config.elementConfig.type === "list" ? (
               <Auxi>
-                <label
+                heh
+                {/* <label
                   className={styles.labelDisc}
                   onClick={(e) => this.showDiscounts(e)}
                 >
@@ -176,7 +172,7 @@ class FormComponent extends Component {
                 </button>
                 <ul className={styles.ulDiscounts}>
                   {this.state.discShowing ? discounts : null}
-                </ul>
+                </ul> */}
               </Auxi>
             ) : (
               <Auxi>
@@ -185,7 +181,6 @@ class FormComponent extends Component {
                   key={formElement.id}
                   type={formElement.config.elementConfig.type}
                   placeholder={formElement.config.elementConfig.placeholder}
-                  value={formElement.config.value}
                   id={formElement.config.label}
                   required={formElement.config.validation.required}
                   onChange={(event) =>

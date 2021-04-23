@@ -9,13 +9,23 @@ class Summary extends Component {
   }
   state = {
     changeForm: false,
+    values: {
+      name: "",
+      surName: "",
+      phoneNumber: "",
+      email: "",
+      discount: "",
+    },
+    discShowing: false,
+  };
+
+  form = {
     reservationForm: {
       name: {
         elementConfig: {
           type: "text",
           placeholder: "Imię",
         },
-        value: "",
         validation: {
           required: true,
         },
@@ -26,7 +36,6 @@ class Summary extends Component {
           type: "text",
           placeholder: "Nazwisko",
         },
-        value: "",
         validation: {
           required: true,
         },
@@ -37,7 +46,6 @@ class Summary extends Component {
           type: "tel",
           placeholder: "Numer Telefonu",
         },
-        value: "",
         validation: {
           required: true,
         },
@@ -48,7 +56,6 @@ class Summary extends Component {
           type: "email",
           placeholder: "E-mail",
         },
-        value: "",
         validation: {
           required: true,
         },
@@ -58,7 +65,6 @@ class Summary extends Component {
           type: "list",
           placeholder: "Zniżki:",
         },
-        value: "",
         validation: {
           required: false,
         },
@@ -70,7 +76,6 @@ class Summary extends Component {
       "Dla Seniora (-34%)",
       "PLANdemia (+200%)",
     ],
-    discShowing: false,
   };
 
   showInputs = () => {
@@ -78,30 +83,19 @@ class Summary extends Component {
   };
 
   inputChangedHandler = (elementType, event, inputIdentifier) => {
-    const updatedreservationForm = {
-      ...this.state.reservationForm,
+    const updatedValues = {
+      ...this.state.values,
     };
-    const updatedFormElement = {
-      ...updatedreservationForm[inputIdentifier],
-    };
-    updatedFormElement.value = event.target.value;
-    updatedreservationForm[inputIdentifier] = updatedFormElement;
-    this.setState({ reservationForm: updatedreservationForm });
+    updatedValues[inputIdentifier] = event.target.value;
+    this.setState({ values: updatedValues });
   };
   reservationHandler = (event) => {
     event.preventDefault();
     this.showInputs();
-    this.props.saveFormPart(this.state.reservationForm);
+    this.props.saveFormPart(this.state.values);
   };
 
   render() {
-    const formElementsArray = [];
-    for (let key in this.state.reservationForm) {
-      formElementsArray.push({
-        id: key,
-        config: this.state.reservationForm[key],
-      });
-    }
     let form;
     if (this.props.userData) {
       form = (
