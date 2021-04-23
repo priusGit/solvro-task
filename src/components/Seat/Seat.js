@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import { connect } from "react-redux";
-import * as actions from "../../../store/actions/index";
+import * as actions from "../../store/actions/index";
 import styles from "./Seat.module.css";
 
 class Seat extends Component {

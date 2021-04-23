@@ -72,50 +72,6 @@ h1 {
   text-align: center;
   position: relative;
 }
-.bottomBar {
-  background-color: rgb(36, 36, 56);
-  border: 3px solid rgb(80, 80, 114);
-  border-radius: 50px;
-  width: 70%;
-  position: fixed;
-  bottom: 0;
-  left: 15%;
-  box-sizing: border-box;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  animation: fade 0.3s;
-}
-.bottomBar div {
-  flex-grow: 1;
-}
-.bottomBar li {
-  font-size: 30px;
-  height: 50px;
-  padding: 0 5px;
-  line-height: 50px;
-  color: white;
-}
-.toForm {
-  display: inline;
-  color: white;
-  text-decoration: none;
-  font-size: 23px;
-  background-color: rgb(251, 158, 37);
-  padding: 7px 30px;
-  border-radius: 50px;
-  font-family: "Oswald", sans-serif;
-  transition: 0.1s linear;
-  border: none;
-  outline: none;
-}
-.toForm:hover {
-  box-shadow: 0px 0px 17px rgb(251, 158, 37);
-}
-.toForm:focus {
-  border: none;
-}
 .pageOverlay {
   height: 100vh;
   width: 100vw;
@@ -136,9 +92,6 @@ h1 {
 }
 .blurry {
   filter: blur(4px);
-}
-.blurry .bottomBar {
-  display: none;
 }
 
 .xSign {

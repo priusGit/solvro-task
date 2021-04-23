@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Switch, withRouter, Route } from "react-router-dom";
 import "./App.css";
-import MainPage from "./components/MainPage/MainPage";
-import ReservationsPage from "./components/ResevationsPage/ReservationsPage";
+import MainPage from "./screens/MainPage/MainPage";
+import ReservationsPage from "./screens/ResevationsPage/ReservationsPage";
 import Auxi from "./hoc/Auxi";
-import Layout from "./components/Layout/Layout";
-import Summary from "./components/Summary/Summary";
+import Layout from "./screens/Layout/Layout";
+import Summary from "./screens/Summary/Summary";
 class App extends Component {
   render() {
     const routes = (
