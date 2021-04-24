@@ -1,0 +1,122 @@
+.mainPage{
+    background-image: url("../../assets/bg.jpg");
+    height: 100vh;
+    width: 100vw;
+    background-size: cover; 
+    background-position: center;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.mainPageOverlay{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.2);
+}
+.movieInfo{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50px;
+    width: 40vw;
+
+}
+.movieInfo h1{
+    font-size: 60px;
+    color: white;
+    margin-bottom: 30px;
+    text-align: left;
+}
+.movieInfo p{
+    font-size: 30px;
+    
+    color: rgb(196, 196, 196);
+}
+.navlinkMain {
+	background-color:#fcac4b;
+	border-radius:8px;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #cc9f52;
+}
+.navlinkMain:hover {
+	background-color:#fb9e25;
+}
+.navlinkMain:active {
+	position:relative;
+	top:1px;
+}
+.pageOverlay{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.356);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+@media (max-width:400px)
+{
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 40px;
+    }
+    .navlinkMain{padding: 15px 20px;}
+}
+@media (min-width:401px) and (max-width:480px)
+{
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 40px;
+    }
+    .navlinkMain{padding: 15px 20px;}
+}
+@media (max-width:570px) and (orientation:landscape)
+{
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 30px;
+        width: 50vw;
+    }
+    .navlinkMain{padding: 10px 15px;}
+}
+@media (min-width:571px) and (max-width:600px) and (orientation:landscape)
+{
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 30px;
+        width: 50vw;
+    }
+    .navlinkMain{padding: 15px 20px;}
+}
+@media (min-width:601px) and (max-width:1023px) and (orientation:landscape)
+{
+    
+    .movieInfo{
+        left: 20px;
+        top: 60%;
+    }
+    .movieInfo h1{
+        font-size: 40px;
+        width: 50vw;
+    }
+    .navlinkMain{padding: 15px 20px;}
+}
+        
+
+        

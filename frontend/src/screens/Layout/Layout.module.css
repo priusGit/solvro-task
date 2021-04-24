@@ -1,0 +1,27 @@
+*{
+    margin:0;
+    padding: 0;
+}
+.topbar
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background: rgb(18, 18, 26);
+    width: 100vw;
+    border-bottom: 3px solid rgb(28, 28, 41);;
+}
+li{
+    display: inline-block;
+    color: #fb9e25;
+    font-family: 'Oswald', sans-serif;
+    font-size: 40px;
+}
+.fake{
+    margin-left: 20px;
+}
+.cinema{
+    text-transform:uppercase;
+    
+}
