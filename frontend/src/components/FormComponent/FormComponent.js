@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import styles from "./FormComponent.module.css";
 import * as actions from "../../store/actions/index";
-// import classNames from "classnames";
+import classNames from "classnames";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Auxi from "../../hoc/Auxi";
+import DiscountsComponent from "../DiscountsComponent/DiscountsComponent";
 class FormComponent extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -104,17 +105,6 @@ class FormComponent extends Component {
   showDiscounts = (e) => {
     this.setState({ discShowing: !this.state.discShowing });
   };
-  // setPickedDiscount = (discName) => {
-  //   const updatedreservationForm = {
-  //     ...this.state.reservationForm,
-  //   };
-  //   const updatedFormElement = {
-  //     ...updatedreservationForm.discounts,
-  //   };
-  //   updatedFormElement.value = discName;
-  //   updatedreservationForm.discounts = updatedFormElement;
-  //   this.setState({ reservationForm: updatedreservationForm });
-  // };
   inputChangedHandler = (elementType, event, inputIdentifier) => {
     const updatedValues = {
       ...this.state.values,
@@ -136,25 +126,13 @@ class FormComponent extends Component {
         config: this.form.reservationForm[key],
       });
     }
-    // const discounts = this.form.discountsNames.map((discName) => (
-    //   <li
-    //     onClick={(e) => {
-    //       this.setPickedDiscount(discName);
-    //       this.showDiscounts(e);
-    //     }}
-    //     key={discName}
-    //   >
-    //     {discName}
-    //   </li>
-    // ));
     const form = (
       <form className={styles.form} onSubmit={this.reservationHandler}>
         {formElementsArray.map((formElement, index) => (
           <div key={index}>
             {formElement.config.elementConfig.type === "list" ? (
               <Auxi>
-                heh
-                {/* <label
+                <label
                   className={styles.labelDisc}
                   onClick={(e) => this.showDiscounts(e)}
                 >
@@ -171,8 +149,12 @@ class FormComponent extends Component {
                   ▶
                 </button>
                 <ul className={styles.ulDiscounts}>
-                  {this.state.discShowing ? discounts : null}
-                </ul> */}
+                  {this.state.discShowing ? (
+                    <DiscountsComponent display={true} />
+                  ) : (
+                    <DiscountsComponent display={false} />
+                  )}
+                </ul>
               </Auxi>
             ) : (
               <Auxi>

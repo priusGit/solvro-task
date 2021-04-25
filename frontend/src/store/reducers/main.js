@@ -9,6 +9,7 @@ const initialState = {
   seatsPicked: [],
   activeHour: null,
   formData: null,
+  discounts: null,
 };
 
 const setActiveHour = (state, action) => {
@@ -48,6 +49,12 @@ const saveFormPart = (state, action) => {
   return {
     ...state,
     formData: UserData,
+  };
+};
+const saveDiscounts = (state, action) => {
+  return {
+    ...state,
+    discounts: action.discounts,
   };
 };
 const fetchMovieSuccess = (state, action) => {
@@ -117,6 +124,8 @@ const reducer = (state = initialState, action) => {
       return saveFormData(state, action);
     case actionTypes.SAVE_SOME_DATA:
       return saveFormPart(state, action);
+    case actionTypes.SAVE_DISCOUNTS:
+      return saveDiscounts(state, action);
     default:
       return state;
   }

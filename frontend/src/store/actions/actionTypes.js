@@ -7,3 +7,4 @@ export const SCREEN_RESIZE = "SCREEN_RESIZE";
 export const SET_ACTIVE_HOUR = "SET_ACTIVE_HOUR";
 export const SAVE_FORM_DATA = "SAVE_FORM_DATA";
 export const SAVE_SOME_DATA = "SAVE_SOME_DATA";
+export const SAVE_DISCOUNTS = "SAVE_DISCOUNTS";

@@ -4,4 +4,5 @@ export {
   saveFormData,
   setActiveHour,
   saveFormPart,
+  saveDiscounts,
 } from "./main";

@@ -3,9 +3,12 @@ import styles from "./Summary.module.css";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Auxi from "../../hoc/Auxi";
+import DiscountsComponent from "../../components/DiscountsComponent/DiscountsComponent";
+import classNames from "classnames";
 class Summary extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
+    this.counter();
   }
   state = {
     changeForm: false,
@@ -14,9 +17,9 @@ class Summary extends Component {
       surName: "",
       phoneNumber: "",
       email: "",
-      discount: "",
     },
     discShowing: false,
+    discAmount: 0,
   };
 
   form = {
@@ -60,15 +63,6 @@ class Summary extends Component {
           required: true,
         },
       },
-      discounts: {
-        elementConfig: {
-          type: "list",
-          placeholder: "Zniżki:",
-        },
-        validation: {
-          required: false,
-        },
-      },
     },
     discountsNames: [
       "Studencka (-50%)",
@@ -78,6 +72,14 @@ class Summary extends Component {
     ],
   };
 
+  counter = () => {
+    let discCount = 0;
+    Object.keys(this.props.discounts).map((keyName, index) => {
+      discCount = discCount + this.props.discounts[keyName];
+      return discCount;
+    });
+    this.setState({ discAmount: discCount });
+  };
   showInputs = () => {
     this.setState({ changeForm: !this.state.changeForm });
   };
@@ -100,7 +102,10 @@ class Summary extends Component {
     if (this.props.userData) {
       form = (
         <form
-          className={styles.form}
+          className={classNames(
+            styles.form,
+            this.state.changeForm ? styles.editable : null
+          )}
           onSubmit={(event) => this.reservationHandler(event)}
         >
           {this.state.changeForm ? (
@@ -170,11 +175,33 @@ class Summary extends Component {
               <p>{this.props.userData.email}</p>
             )}
           </div>
-          <div>
-            <p>Zniżka: </p>
-            <p>{this.props.userData.discounts}</p>
-            <div />
-          </div>
+          {this.state.changeForm ? (
+            <DiscountsComponent display={true} />
+          ) : (
+            <Auxi>
+              <div>
+                <p>
+                  Liczba biletów normalnych:{" "}
+                  {this.props.seatsPicked.length - this.state.discAmount}
+                </p>
+              </div>
+              <div>
+                <p>Liczba biletów ulgowych: {this.state.discAmount}</p>
+              </div>
+              {this.state.discAmount > 0 ? (
+                <Auxi>
+                  <p>Wybrane zniżki:</p>
+                  {Object.keys(this.props.discounts).map((keyName, i) => (
+                    <p key={i}>
+                      {this.form.discountsNames[i]}:{" "}
+                      {this.props.discounts[keyName]}
+                    </p>
+                  ))}
+                </Auxi>
+              ) : null}
+            </Auxi>
+          )}
+
           <ul>
             <li>Wybrane miejsca:</li>
             {this.props.seatsPicked.map((seatMini, index) => (
@@ -185,7 +212,12 @@ class Summary extends Component {
       );
     }
     return (
-      <section className={styles.summary}>
+      <section
+        className={classNames(
+          styles.summary,
+          this.state.changeForm ? styles.editSection : null
+        )}
+      >
         <h1>Podsumowanie</h1>
         {form}
       </section>
@@ -197,6 +229,7 @@ const mapStateToProps = (state) => {
   return {
     userData: state.formData,
     seatsPicked: state.seatsPicked,
+    discounts: state.discounts,
   };
 };
 

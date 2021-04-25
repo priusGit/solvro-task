@@ -60,3 +60,9 @@ export const saveFormPart = (formPart) => {
     formPart: formPart,
   };
 };
+export const saveDiscounts = (discounts) => {
+  return {
+    type: actionTypes.SAVE_DISCOUNTS,
+    discounts: discounts,
+  };
+};
