@@ -169,3 +169,27 @@
     margin: 0;
   }
 }
+@media (max-width: 580px) and (orientation: landscape) {
+  .editSection {
+    min-height: 250vh;
+  }
+  .summary > .editable > div {
+    display: inline-block;
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 581px) and (max-width: 760px) and (orientation: landscape) {
+  .editSection {
+    min-height: 230vh;
+  }
+  .summary > .editable > div {
+    display: inline-block;
+    font-size: 20px;
+  }
+}
+@media (min-width: 760px) and (max-width: 850px) and (orientation: landscape) {
+  .editSection {
+    min-height: 180vh;
+  }
+}
