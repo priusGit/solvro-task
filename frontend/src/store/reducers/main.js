@@ -10,6 +10,7 @@ const initialState = {
   activeHour: null,
   formData: null,
   discounts: null,
+  discAmount: 0,
 };
 
 const setActiveHour = (state, action) => {
@@ -52,9 +53,17 @@ const saveFormPart = (state, action) => {
   };
 };
 const saveDiscounts = (state, action) => {
+  let discCount = 0;
+  if (action.discounts !== undefined) {
+    Object.keys(action.discounts).map((keyName, index) => {
+      discCount = discCount + action.discounts[keyName];
+      return discCount;
+    });
+  }
   return {
     ...state,
     discounts: action.discounts,
+    discAmount: discCount,
   };
 };
 const fetchMovieSuccess = (state, action) => {

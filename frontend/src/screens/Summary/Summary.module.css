@@ -62,6 +62,15 @@
 .editable ul {
   display: none;
 }
+@media (max-width: 360px) {
+  .summary .form input {
+    width: 100%;
+    margin-left: 0px;
+  }
+  section.editSection {
+    min-height: 170vh;
+  }
+}
 @media (max-width: 400px) {
   .summary form {
     margin-top: 10px;

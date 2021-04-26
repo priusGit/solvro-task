@@ -104,7 +104,7 @@ input:focus {
 .addDelete {
   display: flex;
 }
-.addDelete button {
+div.addDelete button {
   border: 2px solid white;
   background-color: transparent;
   color: white;
@@ -112,8 +112,9 @@ input:focus {
   font-size: 30px;
   cursor: pointer;
   outline: none;
+  margin-right: 0;
 }
-button::-moz-focus-inner {
+div.addDelete button:focus {
   border: 2px solid white;
   outline: none;
 }
@@ -121,9 +122,15 @@ button.disabled {
   opacity: 0.4;
   cursor: context-menu;
 }
-.addDelete p {
+div.addDelete p {
   font-size: 30px;
   margin: 0 10px;
+}
+@media (max-width: 360px) {
+  li.leftCounter {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
 }
 @media (max-width: 400px) {
   .leftCounter {

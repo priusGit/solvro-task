@@ -8,7 +8,6 @@ import classNames from "classnames";
 class Summary extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
-    this.counter();
   }
   state = {
     changeForm: false,
@@ -71,15 +70,6 @@ class Summary extends Component {
       "PLANdemia (+200%)",
     ],
   };
-
-  counter = () => {
-    let discCount = 0;
-    Object.keys(this.props.discounts).map((keyName, index) => {
-      discCount = discCount + this.props.discounts[keyName];
-      return discCount;
-    });
-    this.setState({ discAmount: discCount });
-  };
   showInputs = () => {
     this.setState({ changeForm: !this.state.changeForm });
   };
@@ -113,7 +103,9 @@ class Summary extends Component {
               Zapisz
             </button>
           ) : (
-            <button type="submit">Edytuj</button>
+            <button type="submit" onClick={() => this.props.saveDiscounts()}>
+              Edytuj
+            </button>
           )}
           <div>
             <p>Imię i nazwisko: </p>
@@ -182,13 +174,13 @@ class Summary extends Component {
               <div>
                 <p>
                   Liczba biletów normalnych:{" "}
-                  {this.props.seatsPicked.length - this.state.discAmount}
+                  {this.props.seatsPicked.length - this.props.discAmount}
                 </p>
               </div>
               <div>
-                <p>Liczba biletów ulgowych: {this.state.discAmount}</p>
+                <p>Liczba biletów ulgowych: {this.props.discAmount}</p>
               </div>
-              {this.state.discAmount > 0 ? (
+              {this.props.discAmount > 0 ? (
                 <Auxi>
                   <p>Wybrane zniżki:</p>
                   {Object.keys(this.props.discounts).map((keyName, i) => (
@@ -230,12 +222,14 @@ const mapStateToProps = (state) => {
     userData: state.formData,
     seatsPicked: state.seatsPicked,
     discounts: state.discounts,
+    discAmount: state.discAmount,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     saveFormPart: (data) => dispatch(actions.saveFormPart(data)),
+    saveDiscounts: () => dispatch(actions.saveDiscounts()),
   };
 };
 

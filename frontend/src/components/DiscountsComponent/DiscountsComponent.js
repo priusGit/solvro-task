@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styles from "./DiscountsComponent.module.css";
 import * as actions from "../../store/actions/index";
-// import classNames from "classnames";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import classNames from "classnames";
@@ -47,12 +46,6 @@ class DiscountsComponent extends Component {
       discountsSelected: newDiscountsSelectedValue,
     });
   };
-  //   reservationHandler = (event) => {
-  //     event.preventDefault();
-  //     this.props.saveFormData(this.state.values);
-  //     this.props.history.push("/summary");
-  //   };
-
   render() {
     const discounts = this.form.discountsNames.map((discName, index) => (
       <div key={discName} className={styles.discountElement}>
