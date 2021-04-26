@@ -1,12 +1,15 @@
 Marcin Szaro - solvro - w4
 React + Redux
 Całość responsywna w pionie jak i poziomie.
+
+After pointing to "frontend" folder in project:
+
 ```
   npm install
   npm start
 ```
-Application requires also Node.js as all data is stored there.
-After pointing to "node" folder in project:
+Application requires node to be running in the background.
+After pointing to "backend" folder in project:
 ```
-node app.js
+  node app.js
 ```
